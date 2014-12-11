@@ -1,0 +1,9 @@
+<h1>Hello, <%=@user.email%></h1>
+
+<%@posts.each do |i|%>
+	<span><%=@post.title%></span><br/>
+<%end%>
+<br/>
+
+
+<%=link_to "Create new post", new_user_post_path(@user) %>
