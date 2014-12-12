@@ -6,26 +6,27 @@ class PostsController < ApplicationController
 
 	def new
 		@post = Post.new
+		
 	end
 
 	def create
 		@post = Post.create(post_params)
-		@user = User.find(params[:user_id])
+		@user = User.find(session[:user_id])
 		if @post.save
 			flash[:notice] = "Post created!"
 			@user.posts << @post
-			redirect_to user_path
+			redirect_to user_path(@user)
 		else
 			flash[:alert]="Problem"
 			redirect_to new_user_post_path
 		end
 
-	private
-
-	def post_params
-		params.require(:post).permit(:title,:user_id)
+	
 	end
 
+	private
+	def post_params
+		params.require(:post).permit(:title,:user_id)
 	end
 
 end
