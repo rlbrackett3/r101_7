@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		@post = Post.create(post_params)
+		@post = Post.create(post_params)  # This would generally use .new() since .create will save a record if there are no validations even if it is incorrect
 		@user = User.find(session[:user_id])
 		if @post.save
 			flash[:notice] = "Post created!"
